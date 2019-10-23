@@ -16,3 +16,21 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+
+
+
+Route::get('inicio','TasksController@inicio')->name('inicio');
+
+Route::post('logueo','TasksController@logueo')->name('logueo');
+
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('tasks','TasksController@getAll')->name('mostrartodo');
+Route::post('agregar','TasksController@agregar')->name('agregar');
+Route::post('editar/{id}','TasksController@editar')->name('editar');
+Route::get('eliminar/{id}','TasksController@eliminar')->name('eliminar');
+Route::get('mostrar/{id}','TasksController@mostrar')->name('mostrar');
+
+    
+});
